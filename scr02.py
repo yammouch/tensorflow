@@ -13,7 +13,7 @@ init = tf.initialize_all_variables()
 
 with tf.Session() as sess:
   sess.run(init)
-  print "a: %f, b: %f", (sess.run(a), sess.run(b))
+  print "a: %f, b: %f" % (sess.run(a), sess.run(b))
   for i in range(50):
     sess.run(train_step)
-    print "a: %f, b: %f", (sess.run(a), sess.run(b))
+    print "a: %f, b: %f" % (sess.run(a), sess.run(b))
