@@ -40,6 +40,7 @@ init = tf.initialize_all_variables();
 
 td = MyTrain()
 with tf.Session() as sess:
+  sess.run(init)
   for i in range(5):
     inp, exp = td.next()
     sess.run(train_step, feed_dict={x: inp, y_: exp})
