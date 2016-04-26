@@ -22,6 +22,9 @@ class MyTrain:
     return ( np.array(map(lambda i: self.inp[i], idxs))
            , np.array(map(lambda i: self.exp[i], idxs)) )
 
+  def test_data(self):
+    return np.array(self.inp), np.array(self.exp)
+
 x = tf.placeholder(tf.float32, [None, 2])
 y_ = tf.placeholder(tf.float32, [None, 1])
 l1w = tf.Variable(tf.random_normal([2, 3], dtype=tf.float32, seed=0))
@@ -41,7 +44,9 @@ init = tf.initialize_all_variables();
 td = MyTrain()
 with tf.Session() as sess:
   sess.run(init)
-  for i in range(5):
-    inp, exp = td.next()
-    sess.run(train_step, feed_dict={x: inp, y_: exp})
-  print sess.run(l1w)
+  for j in range(5):
+    for i in range(5):
+      inp, exp = td.next()
+      sess.run(train_step, feed_dict={x: inp, y_: exp})
+    inp, exp = td.test_data()
+    #print sess.run(err, feed_dict={x: inp, y_: exp})
